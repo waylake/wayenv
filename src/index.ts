@@ -8,6 +8,8 @@ import { listProjects } from "./commands/listProjects";
 import { renameProject } from "./commands/renameProject";
 import { search } from "./commands/search";
 import { update } from "./commands/update";
+import { backup } from "./commands/backup";
+import { restore } from "./commands/restore";
 import { configManager } from "./config/configManager";
 
 const program = new Command();
@@ -79,6 +81,20 @@ program
   .option("--project <project>", "Project name", "default")
   .option("--mask", "Mask the values")
   .action((options) => search(options.key, options.project, options.mask));
+
+program
+  .command("backup")
+  .description("Backup environment variables to a file")
+  .option("--project <project>", "Project name")
+  .option("--output <output>", "Output file path")
+  .action((options) => backup(options.project, options.output));
+
+program
+  .command("restore")
+  .description("Restore environment variables from a file")
+  .option("--project <project>", "Project name")
+  .option("--input <input>", "Input file path")
+  .action((options) => restore(options.project, options.input));
 
 // Parse arguments
 program.parse(process.argv);

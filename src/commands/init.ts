@@ -29,7 +29,7 @@ export async function init() {
   const passwordHash = await Bun.password.hash(response.password);
 
   configManager.updateConfig({
-    dbPath: response.dbPath + "wayenv.sqlite",
+    dbPath: response.dbPath,
     passwordHash,
     passwordCheckInterval: response.passwordCheckInterval * 60000,
     lastPasswordCheck: Date.now(),

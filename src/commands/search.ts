@@ -10,7 +10,6 @@ export async function search(
   mask: boolean = false,
 ) {
   if (!(await checkPassword())) return;
-  console.log(mask);
 
   if (!key || !project) {
     const response = await promptInputs([

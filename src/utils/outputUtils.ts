@@ -6,8 +6,6 @@ import { configManager } from "../config/configManager";
 export function printEnvs(envs: Env[], mask: boolean = false) {
   const outputFormat = configManager.getConfig().outputFormat;
 
-  console.log(mask);
-
   const maskValue = (value: string) =>
     mask ? value.replace(/./g, "*") : value;
 
