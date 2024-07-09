@@ -1,75 +1,16 @@
 # wayenv
 
-wayenv는 환경 변수를 관리하기 위한 간단하고 강력한 CLI 도구입니다. 이 도구는 프로젝트 별로 환경 변수를 쉽게 추가, 삭제, 조회, 및 목록화할 수 있도록 도와줍니다.
+wayenv는 환경 변수를 관리하기 위한 간단한 CLI 도구입니다. \
+프로젝트 별로 환경 변수를 쉽게 추가, 삭제, 조회, 및 목록화할 수 있도록 도와줍니다.
 
-## 설치
-
-wayenv를 설치하려면 먼저 `bun`을 설치해야 합니다. `bun`은 JavaScript 및 TypeScript 런타임으로, [bun의 공식 GitHub 페이지](https://github.com/oven-sh/bun)에서 자세한 내용을 확인할 수 있습니다.
-
-### bun 설치
-
-bun을 설치하려면 다음 명령어를 사용하세요:
-
-```sh
-curl -fsSL https://bun.sh/install | bash
-```
-### 프로젝트 설치 및 실행 
-
-1. GitHub에서 프로젝트를 클론합니다:
-
-
-```sh
-git clone https://github.com/waylake/wayenv.git
-cd wayenv
-```
-
-1. 종속성을 설치합니다:
-
-
-```sh
-bun install
-```
-
-1. 프로젝트를 빌드합니다:
-
-
-```sh
-bun build src/index.ts --compile --outfile wayenv
-```
-
-1. 프로젝트를 실행합니다:
-
-
-```sh
-./wayenv --help
-
-Usage: wayenv [options] [command]
-
-CLI for managing environment variables
-
-Options:
-  -V, --version             output the version number
-  -h, --help                display help for command
-
-Commands:
-  init                      Initialize the configuration
-  add [options]             Add a new environment variable
-  remove [options]          Remove an environment variable
-  list [options]            List environment variables
-  get [options]             Get the value of an environment variable
-  list-projects             List all projects
-  rename-project [options]  Rename a project
-  help [command]            display help for command
-```
-
-
-또는 Homebrew를 통해 설치할 수 있습니다:
+## 설치 
 
 
 ```sh
 brew tap waylake/wayenv
 brew install wayenv
 ```
+
 
 ## 사용법 
 
@@ -175,29 +116,68 @@ wayenv rename-project --old-name <oldName> --new-name <newName>
 wayenv rename-project
 ```
 
+## 설치
 
+wayenv를 설치하려면 먼저 `bun`을 설치해야 합니다.\
+`bun`은 JavaScript 및 TypeScript 런타임으로, [bun의 공식 GitHub 페이지](https://github.com/oven-sh/bun)에서 자세한 내용을 확인할 수 있습니다.
 
-## Homebrew를 통한 설치 
+### bun 설치
 
-Homebrew를 사용하여 wayenv를 설치할 수 있습니다. Homebrew는 macOS 및 Linux에서 소프트웨어를 간편하게 설치하고 관리할 수 있는 패키지 관리자입니다.
+bun을 설치하려면 다음 명령어를 사용하세요:
 
-### Homebrew Tap 추가 
+```sh
+curl -fsSL https://bun.sh/install | bash
+```
+### 프로젝트 설치 및 실행 
 
-먼저 Homebrew Tap을 추가합니다:
+1. GitHub에서 프로젝트를 클론합니다:
 
 
 ```sh
-brew tap waylake/wayenv
+git clone https://github.com/waylake/wayenv.git
+cd wayenv
 ```
 
-### wayenv 설치 
-
-Tap을 추가한 후 wayenv를 설치합니다:
+1. 종속성을 설치합니다:
 
 
 ```sh
-brew install wayenv
+bun install
 ```
+
+1. 프로젝트를 빌드합니다:
+
+
+```sh
+bun build src/index.ts --compile --outfile wayenv
+```
+
+1. 프로젝트를 실행합니다:
+
+
+```sh
+./wayenv --help
+
+Usage: wayenv [options] [command]
+
+CLI for managing environment variables
+
+Options:
+  -V, --version             output the version number
+  -h, --help                display help for command
+
+Commands:
+  init                      Initialize the configuration
+  add [options]             Add a new environment variable
+  remove [options]          Remove an environment variable
+  list [options]            List environment variables
+  get [options]             Get the value of an environment variable
+  list-projects             List all projects
+  rename-project [options]  Rename a project
+  help [command]            display help for command
+```
+
+
 
 ## Contribute
 
