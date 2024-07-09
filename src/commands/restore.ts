@@ -52,7 +52,7 @@ export async function restore(project?: string, input?: string) {
   }
 
   const db = databaseManager.getDatabase();
-  const encryptedData = readFileSync(input, "utf-8");
+  const encryptedData = readFileSync(input);
   const decryptedData = decrypt(encryptedData, secretKey);
 
   let envs;

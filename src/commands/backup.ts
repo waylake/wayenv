@@ -56,7 +56,7 @@ export async function backup(project?: string, output?: string) {
     : db.query("SELECT * FROM envs").all();
 
   const encryptedData = encrypt(JSON.stringify(envs), secretKey);
-  writeFileSync(output, encryptedData, "utf-8");
+  writeFileSync(output, encryptedData);
 
   console.log(
     chalk.green(`Backup complete. Encrypted data saved to ${output}.`),
