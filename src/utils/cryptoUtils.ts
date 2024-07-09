@@ -17,12 +17,12 @@ export function encrypt(text: string, secretKey: string): Buffer {
 
 export function decrypt(buffer: Buffer, secretKey: string): string {
   const signatureLength = Buffer.byteLength(signature);
-  const fileSignature = buffer.slice(0, signatureLength).toString();
+  const fileSignature = buffer.subarray(0, signatureLength).toString();
   if (fileSignature !== signature) {
     throw new Error("Invalid backup file signature");
   }
-  const iv = buffer.slice(signatureLength, signatureLength + 16);
-  const encryptedText = buffer.slice(signatureLength + 16);
+  const iv = buffer.subarray(signatureLength, signatureLength + 16);
+  const encryptedText = buffer.subarray(signatureLength + 16);
   const decipher = crypto.createDecipheriv(
     algorithm,
     crypto.createHash("sha256").update(secretKey).digest(),
