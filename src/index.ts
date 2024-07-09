@@ -24,12 +24,17 @@ program
 program
   .command("add")
   .description("Add a new environment variable")
-  .action(add);
+  .option("--key <key>", "Environment variable key")
+  .option("--value <value>", "Environment variable value")
+  .option("--project <project>", "Project name", "default")
+  .action((options) => add(options.key, options.value, options.project));
 
 program
   .command("remove")
   .description("Remove an environment variable")
-  .action(remove);
+  .option("--key <key>", "Environment variable key")
+  .option("--project <project>", "Project name", "default")
+  .action((options) => remove(options.key, options.project));
 
 program
   .command("list")
@@ -38,13 +43,16 @@ program
     "Output format (table or list)",
     config.outputFormat,
   )
+  .option("--project <project>", "Project name", "")
   .description("List environment variables")
-  .action((options) => list(options.format));
+  .action((options) => list(options.format, options.project));
 
 program
   .command("get")
   .description("Get the value of an environment variable")
-  .action(get);
+  .option("--key <key>", "Environment variable key")
+  .option("--project <project>", "Project name", "default")
+  .action((options) => get(options.key, options.project));
 
 program
   .command("list-projects")
@@ -54,7 +62,9 @@ program
 program
   .command("rename-project")
   .description("Rename a project")
-  .action(renameProject);
+  .option("--old-name <oldName>", "Current project name")
+  .option("--new-name <newName>", "New project name")
+  .action((options) => renameProject(options.oldName, options.newName));
 
 // Parse arguments
 program.parse(process.argv);

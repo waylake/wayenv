@@ -1,6 +1,6 @@
 import { configManager } from "../config/configManager";
 import { promptInputs } from "../utils/promptUtils";
-import { CONFIG_DIR } from "../config/constants";
+import { CONFIG_DIR, DEFAULT_DB_PATH } from "../config/constants";
 import { existsSync, mkdirSync } from "fs";
 import chalk from "chalk";
 
@@ -10,7 +10,7 @@ export async function init() {
       type: "text",
       name: "dbPath",
       message: "Enter the path for the SQLite database:",
-      initial: CONFIG_DIR,
+      initial: DEFAULT_DB_PATH,
     },
     {
       type: "password",
@@ -29,7 +29,7 @@ export async function init() {
   const passwordHash = await Bun.password.hash(response.password);
 
   configManager.updateConfig({
-    dbPath: response.dbPath,
+    dbPath: response.dbPath + "wayenv.sqlite",
     passwordHash,
     passwordCheckInterval: response.passwordCheckInterval * 60000,
     lastPasswordCheck: Date.now(),

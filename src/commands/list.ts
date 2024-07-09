@@ -6,30 +6,40 @@ import chalk from "chalk";
 import { Env } from "../config/types";
 import Table from "cli-table3";
 
-export async function list(format?: string) {
+export async function list(format?: string, project?: string) {
   if (!(await checkPassword())) return;
 
-  const response = await promptInputs([
-    {
-      type: "text",
-      name: "project",
-      message: "Enter the project name to list (leave empty for all projects):",
-      initial: "",
-    },
-  ]);
+  if (!project) {
+    const response = await promptInputs([
+      {
+        type: "text",
+        name: "project",
+        message:
+          "Enter the project name to list (leave empty for all projects):",
+        initial: "",
+      },
+    ]);
+    project = response.project;
+  }
 
   const outputFormat: "list" | "table" = format === "table" ? "table" : "list";
 
   const db = databaseManager.getDatabase();
   const envs = (
-    response.project
-      ? db.query("SELECT * FROM envs WHERE project = ?").all(response.project)
+    project
+      ? db.query("SELECT * FROM envs WHERE project = ?").all(project)
       : db.query("SELECT * FROM envs").all()
   ) as Env[];
 
   if (outputFormat === "table") {
     const table = new Table({
       head: ["Key", "Value", "Project"],
+      colWidths: [30, 50, 20], // Adjust the widths to fit your content
+      wordWrap: true,
+      style: {
+        head: ["green"],
+        border: ["gray"],
+      },
     });
 
     envs.forEach((env) => {
