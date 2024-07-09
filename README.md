@@ -28,21 +28,18 @@ git clone https://github.com/waylake/wayenv.git
 cd wayenv
 ```
 
-1. 종속성을 설치합니다:
-
-
 ```sh
 bun install
 ```
 
-1. 프로젝트를 빌드합니다:
+2. 프로젝트를 빌드합니다:
 
 
 ```sh
 bun build src/index.ts --compile --outfile wayenv
 ```
 
-1. 프로젝트를 실행합니다:
+3. 프로젝트를 실행합니다:
 
 
 ```sh
