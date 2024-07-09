@@ -10,6 +10,8 @@ import { search } from "./commands/search";
 import { update } from "./commands/update";
 import { backup } from "./commands/backup";
 import { restore } from "./commands/restore";
+import { share } from "./commands/share";
+import { receive } from "./commands/receive";
 import { configManager } from "./config/configManager";
 
 const program = new Command();
@@ -95,6 +97,16 @@ program
   .option("--project <project>", "Project name")
   .option("--input <input>", "Input file path")
   .action((options) => restore(options.project, options.input));
+
+program
+  .command("share")
+  .description("Share environment variables through a server")
+  .action(share);
+
+program
+  .command("receive")
+  .description("Receive environment variables from a server")
+  .action(receive);
 
 // Parse arguments
 program.parse(process.argv);
