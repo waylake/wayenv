@@ -18,7 +18,7 @@ const config = configManager.getConfig();
 program
   .name("wayenv")
   .description("CLI for managing environment variables")
-  .version("1.0.0");
+  .version("1.0.2");
 
 program
   .command("init")
