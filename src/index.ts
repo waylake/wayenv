@@ -2,6 +2,7 @@ import { Command } from "commander";
 import { init } from "./commands/init";
 import { add } from "./commands/add";
 import { apply } from "./commands/apply";
+import { exportEnv } from "./commands/exportEnv";
 import { remove } from "./commands/remove";
 import { list } from "./commands/list";
 import { get } from "./commands/get";
@@ -42,6 +43,13 @@ program
   .option("--project <project>", "Project name")
   .option("--key <key>", "Environment variable key")
   .action((options) => apply(options.project, options.key));
+
+program
+  .command("export")
+  .description("Export environment variables")
+  .option("--format <format>", "Export format")
+  .option("--project <project>", "Project name")
+  .action((options) => exportEnv(options.format, options.project));
 
 program
   .command("remove")
