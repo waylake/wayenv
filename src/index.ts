@@ -1,6 +1,7 @@
 import { Command } from "commander";
 import { init } from "./commands/init";
 import { add } from "./commands/add";
+import { apply } from "./commands/apply";
 import { remove } from "./commands/remove";
 import { list } from "./commands/list";
 import { get } from "./commands/get";
@@ -34,6 +35,13 @@ program
   .option("--value <value>", "Environment variable value")
   .option("--project <project>", "Project name", "default")
   .action((options) => add(options.key, options.value, options.project));
+
+program
+  .command("apply")
+  .description("Apply environment variables to the current session")
+  .option("--project <project>", "Project name")
+  .option("--key <key>", "Environment variable key")
+  .action((options) => apply(options.project, options.key));
 
 program
   .command("remove")
