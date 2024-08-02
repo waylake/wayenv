@@ -16,6 +16,9 @@ export async function init() {
       type: "password",
       name: "password",
       message: "Enter a password for encryption:",
+      validate: (value) => {
+        return value ? true : "Password is required."; // 비밀번호가 입력되지 않으면 오류 메시지
+      },
     },
     {
       type: "number",
@@ -23,7 +26,22 @@ export async function init() {
       message: "Enter password check interval in minutes:",
       initial: 10,
     },
+    {
+      type: "text",
+      name: "outputFormat",
+      message: "Enter default output format for env (list or table):",
+      initial: "table",
+      validate: (value) => {
+        const validFormats = ["list", "table"];
+        return validFormats.includes(value) || "Please enter 'list' or 'table'.";
+      },
+    },
   ]);
+
+  if (!response.password) {
+    console.log(chalk.red("Password cannot be empty."));
+    return; // 비밀번호가 비어있으면 초기화 중단
+  }
 
   // https://bun.sh/docs/api/hashing
   const passwordHash = await Bun.password.hash(response.password);
@@ -33,6 +51,7 @@ export async function init() {
     passwordHash,
     passwordCheckInterval: response.passwordCheckInterval * 60000,
     lastPasswordCheck: Date.now(),
+    outputFormat: response.outputFormat,
   });
 
   if (!existsSync(CONFIG_DIR)) {
